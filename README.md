@@ -1,6 +1,6 @@
 MediChatApp is a Streamlit-based AI assistant that allows users to upload medical PDF documents and ask questions related to them. The app uses LangChain, FAISS, and Euriai API for intelligent document understanding and response generation.
 
-🧠 How It Works
+<h1>🧠 How It Works</h1>
  1. Upload PDF: User uploads a medical document. 
 
 2. Extract Text: App parses the PDF into raw text using PyPDF. 
@@ -18,7 +18,7 @@ MediChatApp is a Streamlit-based AI assistant that allows users to upload medica
 
 2. Built using open-source tools from Hugging Face, FAISS, and LangChain community.
 
-🔮 Future Improvements
+<h1>🔮 Future Improvements</h1>
 1. Fine-tune on medical-specific documents
 
 2. Add document summarization on upload
