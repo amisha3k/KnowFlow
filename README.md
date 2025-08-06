@@ -13,7 +13,7 @@ MediChatApp is a Streamlit-based AI assistant that allows users to upload medica
 
 6. Retrieve & Respond: The app fetches the most relevant text chunks and uses the LLM (via Euriai) to generate a response. 
 
-🙌 Acknowledgments
+<h1>🙌 Acknowledgments</h1>
 1. Inspired by the growing need for AI tools in the healthcare documentation space.
 
 2. Built using open-source tools from Hugging Face, FAISS, and LangChain community.
@@ -23,9 +23,5 @@ MediChatApp is a Streamlit-based AI assistant that allows users to upload medica
 
 2. Add document summarization on upload
 
-3. Support for multiple file uploads
-
-4. Add voice input/output integration
-
-5. Deploy via Docker / Streamlit Cloud / Hugging Face Spaces
+3. Add voice input/output integration
 
