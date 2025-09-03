@@ -1,7 +1,7 @@
-# 
 import time
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.memory import ConversationBufferMemory  # or ConversationBufferWindowMemory
 
 # App modules
 from app.ui import pdf_uploader
@@ -21,159 +21,100 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# st.markdown(
-#     """
-#     <style>
-#         /* Whole App Background */
-#         .stApp {
-#             background-color: #000000 !important;
-#             color: #e0e0e0 !important;
-#         }
-
-#         /* Sidebar background - force pure black */
-#         section[data-testid="stSidebar"], .css-1d391kg, .css-1v0mbdj, .css-12oz5g7 {
-#             background-color: #000000 !important;
-#             color: #e0e0e0 !important;
-#         }
-
-#         /* Neon LED Headings */
-#         h2,h3{
-#             font-weight: bold;
-#             color: #00bfff;
-#             text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 20px #00bfff;
-#         }
-
-#         /* Sidebar headings & text */
-#         section[data-testid="stSidebar"] h1,
-#         section[data-testid="stSidebar"] h2,
-#         section[data-testid="stSidebar"] h3,
-#         section[data-testid="stSidebar"] p {
-#             color: #00bfff !important;
-#             font-weight: bold;
-#             text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff;
-#         }
-
-#         /* File uploader box */
-#         [data-testid="stFileUploader"] {
-#             background-color: #111111;
-#             border: 2px dashed #00bfff;
-#             border-radius: 10px;
-#             padding: 1rem;
-#             color: #00bfff;
-#         }
-
-#         /* Buttons */
-#         .stButton>button {
-#             background-color: #00bfff;
-#             color: black;
-#             font-weight: bold;
-#             border-radius: 8px;
-#         }
-
-#         .stButton>button:hover {
-#             background-color: #0288d1;
-#             color: white;
-#         }
-
-#         /* Success messages in neon blue */
-#         .stAlert {
-#             font-weight: bold;
-#             color: #00bfff !important;
-#             text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 20px #00bfff;
-#         }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 st.markdown(
     """
     <style>
         /* Whole App Background */
         .stApp {
             background-color: #000000 !important;
-            color: #e0e0e0 !important;
+            color: #ffffff !important;
         }
-
-        /* Sidebar background - force pure black */
-        section[data-testid="stSidebar"], .css-1d391kg, .css-1v0mbdj, .css-12oz5g7 {
+        
+        header[data-testid="stHeader"] {
             background-color: #000000 !important;
-            color: #e0e0e0 !important;
+            color: #ffffff !important;
         }
 
-        /* Neon LED Headings */
-        h2,h3{
+        header[data-testid="stHeader"] .stAppHeader {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+        
+
+        /* Sidebar background */
+        section[data-testid="stSidebar"] {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        /* Headings - simple white, no glow */
+        h1, h2, h3 {
             font-weight: bold;
-            color: #00bfff;
-            text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 20px #00bfff;
+            color: #ffffff !important;
+            text-shadow: none !important;
         }
 
-        /* Sidebar headings & text */
+        /* Sidebar text */
         section[data-testid="stSidebar"] h1,
         section[data-testid="stSidebar"] h2,
         section[data-testid="stSidebar"] h3,
         section[data-testid="stSidebar"] p {
-            color: #00bfff !important;
-            font-weight: bold;
-            text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff;
-        }
-
-        /* Make "Document Upload" bigger */
-        section[data-testid="stSidebar"] h3 {
-            font-size: 1.6rem !important;
+            color: #ffffff !important;
+            font-weight: normal !important;
+            text-shadow: none !important;
         }
 
         /* File uploader box */
         [data-testid="stFileUploader"] {
             background-color: #111111;
-            border: 2px dashed #00bfff;
-            border-radius: 10px;
+            border: 0.5px dashed #ffffff;
+            border-radius: 5px;
             padding: 1rem;
-            color: #00bfff;
+            color: #ffffff;
         }
 
-        /* Buttons */
+        /* Buttons - simple black & white */
         .stButton>button {
-            background-color: #00bfff;
-            color: black;
+            background-color: #ffffff;
+            color: #000000;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 5px;
         }
 
         .stButton>button:hover {
-            background-color: #0288d1;
-            color: white;
+            background-color: #cccccc;
+            color: #000000;
         }
 
-        /* Success messages in neon blue */
+        /* Alerts - plain white text */
         .stAlert {
-            font-weight: bold;
-            color: #00bfff !important;
-            text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 20px #00bfff;
+            font-weight: normal;
+            color: #ffffff !important;
+            text-shadow: none !important;
         }
 
         /* Chat input box styling */
         div[data-testid="stChatInput"] {
-            background-color: #000000 !important;
-            border: 2px solid #ffffff !important;
-            border-radius: 25px !important;
-            padding: 5px !important;
-            color: #ffffff !important;
+            background-color: #ffffff !important;
+            border: 1px solid #ffffff !important;
+            border-radius: 2px !important;
+            padding: 2px !important;
+            color: #000000 !important;
         }
 
         /* Placeholder text inside input */
         div[data-testid="stChatInput"] input {
-            color: #ffffff !important;
+            color: #000000 !important;
         }
 
-        /* White send arrow */
+        /* Send button */
         div[data-testid="stChatInput"] button {
-            color: #ffffff !important;
+            color: #000000 !important;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
-
 
 
 # ------------------------
@@ -187,6 +128,14 @@ if "vectorstore" not in st.session_state:
 
 if "chat_model" not in st.session_state:
     st.session_state.chat_model = None
+
+if "memory" not in st.session_state:
+    st.session_state.memory = ConversationBufferMemory(
+        memory_key="chat_history",
+        return_messages=True
+    )
+    # 🔄 Swap with ConversationBufferWindowMemory(k=5, return_messages=True)
+    # if you want it to only remember the last 5 exchanges
 
 
 # ------------------------
@@ -258,35 +207,48 @@ if prompt:
         st.caption(timestamp)
 
     # ------------------------
-    # Generate Assistant Response
+    # Generate Assistant Response with Memory
     # ------------------------
     if st.session_state.vectorstore and st.session_state.chat_model:
         with st.chat_message("assistant"):
             with st.spinner("🔍 Searching your documents..."):
-                if prompt.strip() == "":
-                    st.warning("⚠️ Please enter a valid query.")
-                else:
-                    # Retrieve relevant docs
-                    relevant_docs = retrieve_relevent_docs(
-                        st.session_state.vectorstore, prompt
-                    )
-                    context = "\n\n".join([doc.page_content for doc in relevant_docs])
+                relevant_docs = retrieve_relevent_docs(
+                    st.session_state.vectorstore, prompt
+                )
+                context = "\n\n".join([doc.page_content for doc in relevant_docs])
 
-                    # System prompt
-                    system_prompt = f"""
-                    You are MediChat Pro, an intelligent medical document assistant.
-                    Based on the following medical documents, provide accurate and helpful answers.
-                    If the information is not in the documents, clearly state that.
+                # ✅ Retrieve chat history from memory
+                history_text = st.session_state.memory.load_memory_variables({})["chat_history"]
 
-                    Medical Documents:
-                    {context}
+                # System prompt with history + context
+                system_prompt = f"""
+                You are MediChat Pro, an intelligent medical document assistant.
 
-                    User Question: {prompt}
+                Conversation so far:
+                {history_text}
 
-                    Answer:
-                    """
+                Relevant Medical Documents:
+                {context}
 
-                    response = ask_chat_model(st.session_state.chat_model, system_prompt)
+                Now, answer the user's latest question clearly and helpfully.
+
+                User Question: {prompt}
+
+                Answer:
+                """
+
+                response = ask_chat_model(st.session_state.chat_model, system_prompt)
+
+                # Save response to messages
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": response,
+                    "timestamp": timestamp
+                })
+
+                # Save into memory
+                st.session_state.memory.chat_memory.add_user_message(prompt)
+                st.session_state.memory.chat_memory.add_ai_message(response)
 
                 # Display assistant response
                 st.markdown(response)
