@@ -21,36 +21,129 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# st.markdown(
+#     """
+#     <style>
+#         /* Whole App Background */
+#         .stApp {
+#             background-color: #000000 !important;
+#             color: #ffffff !important;
+#         }
+        
+#         header[data-testid="stHeader"] {
+#             background-color: #000000 !important;
+#             color: #ffffff !important;
+#         }
+
+#         header[data-testid="stHeader"] .stAppHeader {
+#             background-color: #000000 !important;
+#             color: #ffffff !important;
+#         }
+        
+
+#         /* Sidebar background */
+#         section[data-testid="stSidebar"] {
+#             background-color: #000000 !important;
+#             color: #ffffff !important;
+#         }
+
+#         /* Headings - simple white, no glow */
+#         h1, h2, h3 {
+#             font-weight: bold;
+#             color: #ffffff !important;
+#             text-shadow: none !important;
+#         }
+
+#         /* Sidebar text */
+#         section[data-testid="stSidebar"] h1,
+#         section[data-testid="stSidebar"] h2,
+#         section[data-testid="stSidebar"] h3,
+#         section[data-testid="stSidebar"] p {
+#             color: #ffffff !important;
+#             font-weight: normal !important;
+#             text-shadow: none !important;
+#         }
+
+#         /* File uploader box */
+#         [data-testid="stFileUploader"] {
+#             background-color: #111111;
+#             border: 0.5px dashed #ffffff;
+#             border-radius: 5px;
+#             padding: 1rem;
+#             color: #ffffff;
+#         }
+
+#         /* Buttons - simple black & white */
+#         .stButton>button {
+#             background-color: #ffffff;
+#             color: #000000;
+#             font-weight: bold;
+#             border-radius: 5px;
+#         }
+
+#         .stButton>button:hover {
+#             background-color: #cccccc;
+#             color: #000000;
+#         }
+
+#         /* Alerts - plain white text */
+#         .stAlert {
+#             font-weight: normal;
+#             color: #ffffff !important;
+#             text-shadow: none !important;
+#         }
+
+#         /* Chat input box styling */
+#         div[data-testid="stChatInput"] {
+#             background-color: #ffffff !important;
+#             border: 1px solid #ffffff !important;
+#             border-radius: 2px !important;
+#             padding: 2px !important;
+#             color: #000000 !important;
+#         }
+
+#         /* Placeholder text inside input */
+#         div[data-testid="stChatInput"] input {
+#             color: #000000 !important;
+#         }
+
+#         /* Send button */
+#         div[data-testid="stChatInput"] button {
+#             color: #000000 !important;
+#         }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 st.markdown(
     """
     <style>
         /* Whole App Background */
         .stApp {
-            background-color: #000000 !important;
-            color: #ffffff !important;
+            background-color: #2c2c2c !important; /* Dark grey */
+            color: #d3d3d3 !important; /* Light grey text */
         }
         
         header[data-testid="stHeader"] {
-            background-color: #000000 !important;
-            color: #ffffff !important;
+            background-color: #2c2c2c !important;
+            color: #d3d3d3 !important;
         }
 
         header[data-testid="stHeader"] .stAppHeader {
-            background-color: #000000 !important;
-            color: #ffffff !important;
+            background-color: #2c2c2c !important;
+            color: #d3d3d3 !important;
         }
         
-
         /* Sidebar background */
         section[data-testid="stSidebar"] {
-            background-color: #000000 !important;
-            color: #ffffff !important;
+            background-color: #3a3a3a !important; /* Slightly lighter grey */
+            color: #d3d3d3 !important;
         }
 
-        /* Headings - simple white, no glow */
+        /* Headings */
         h1, h2, h3 {
             font-weight: bold;
-            color: #ffffff !important;
+            color: #f0f0f0 !important; /* Very light grey */
             text-shadow: none !important;
         }
 
@@ -59,44 +152,44 @@ st.markdown(
         section[data-testid="stSidebar"] h2,
         section[data-testid="stSidebar"] h3,
         section[data-testid="stSidebar"] p {
-            color: #ffffff !important;
+            color: #d3d3d3 !important;
             font-weight: normal !important;
             text-shadow: none !important;
         }
 
         /* File uploader box */
         [data-testid="stFileUploader"] {
-            background-color: #111111;
-            border: 0.5px dashed #ffffff;
+            background-color: #444444; /* Medium grey */
+            border: 0.5px dashed #d3d3d3;
             border-radius: 5px;
             padding: 1rem;
-            color: #ffffff;
+            color: #d3d3d3;
         }
 
-        /* Buttons - simple black & white */
+        /* Buttons */
         .stButton>button {
-            background-color: #ffffff;
-            color: #000000;
+            background-color: #d3d3d3;
+            color: #2c2c2c;
             font-weight: bold;
             border-radius: 5px;
         }
 
         .stButton>button:hover {
-            background-color: #cccccc;
-            color: #000000;
+            background-color: #b0b0b0;
+            color: #2c2c2c;
         }
 
-        /* Alerts - plain white text */
+        /* Alerts */
         .stAlert {
             font-weight: normal;
-            color: #ffffff !important;
+            color: #f0f0f0 !important;
             text-shadow: none !important;
         }
 
-        /* Chat input box styling */
+        /* Chat input box */
         div[data-testid="stChatInput"] {
-            background-color: #ffffff !important;
-            border: 1px solid #ffffff !important;
+            background-color: #e0e0e0 !important; /* Light grey input */
+            border: 1px solid #c0c0c0 !important;
             border-radius: 2px !important;
             padding: 2px !important;
             color: #000000 !important;
@@ -115,6 +208,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 # ------------------------
