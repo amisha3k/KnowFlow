@@ -48,21 +48,21 @@ cd medical_bot
 ```bash
 pip install --upgrade pip
 ```
-3.Install Dependencies:
+3. Install Dependencies:
 ```bash
 pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn
 ```
-4.Running the Backend (FastAPI):
+4. Running the Backend (FastAPI):
 ```bash
 cd backend
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
-5.Running the Frontend (Streamlit):
+5. Running the Frontend (Streamlit):
 ```bash
 cd frontend
 streamlit run main.py
 ```
-6.Using Docker (Optional):
+6. Using Docker (Optional):
 ```bash
 docker build -t medical_bot:latest .
 docker run -p 8501:8501 -p 8000:8000 medical_bot:latest
