@@ -68,4 +68,16 @@ docker build -t medical_bot:latest .
 docker run -p 8501:8501 -p 8000:8000 medical_bot:latest
 ```
 
+---
+
+## Architecture Flow Diagram
+
+```mermaid
+flowchart TD
+    A[Hugging Face Space Hosting] --> B[Docker Containerized Environment]
+    B --> C1[Streamlit Frontend: PDF Upload UI]
+    B --> C2[FastAPI Backend: PDF Processing API]
+    C1 --> C2
+    C2 --> D[PDF Document Upload & Text Extraction / Embeddings]
+
 
