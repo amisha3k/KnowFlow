@@ -1,27 +1,38 @@
-MediChatApp is a Streamlit-based AI assistant that allows users to upload medical PDF documents and ask questions related to them. The app uses LangChain, FAISS, and Euriai API for intelligent document understanding and response generation.
+# Medical Bot AI Agent (RAG-Based)
 
-<h1>🧠 How It Works</h1>
- 1. Upload PDF: User uploads a medical document. 
+Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project designed to provide intelligent responses and assistance for medical-related queries. It integrates a Streamlit frontend with a FastAPI backend and leverages state-of-the-art AI libraries for embedding, retrieval, and document handling.
 
-2. Extract Text: App parses the PDF into raw text using PyPDF. 
+---
 
-3. Vectorize: Text is chunked and embedded via Sentence Transformers. 
+## Features
 
-4. Store: Embeddings are saved in FAISS for efficient retrieval. 
+- **RAG-Based AI**: Uses semantic search to retrieve relevant medical information from PDFs or documents.  
+- **Streamlit Frontend**: Interactive web interface for easy user interaction.  
+- **FastAPI Backend**: Serves API endpoints for AI inference and document handling.  
+- **Document Handling**: Supports PDF uploads and extraction using `fpdf` and `pypdf`.  
+- **Semantic Search**: Powered by `faiss-cpu` and `sentence-transformers` for fast and accurate retrieval.  
+- **LangChain Integration**: Manages conversational memory, prompts, and retrieval logic.  
 
-5. Ask Questions: User submits questions via chat UI.
+---
 
-6. Retrieve & Respond: The app fetches the most relevant text chunks and uses the LLM (via Euriai) to generate a response. 
+## Tech Stack
 
-<h1>🙌 Acknowledgments</h1>
-1. Inspired by the growing need for AI tools in the healthcare documentation space.
+- **Frontend**: Streamlit  
+- **Backend**: FastAPI, Uvicorn  
+- **RAG & NLP**: LangChain, LangChain Community, FAISS, Sentence Transformers  
+- **Document Processing**: PyPDF, FPDF  
+- **Data Validation**: Pydantic  
 
-2. Built using open-source tools from Hugging Face, FAISS, and LangChain community.
+---
 
-<h1>🔮 Future Improvements</h1>
-1. Fine-tune on medical-specific documents
+## Installation
 
-2. Add document summarization on upload
+> Make sure you have Python 3.10+ installed.
 
-3. Add voice input/output integration
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/medical_bot.git
+cd medical_bot
+
 
