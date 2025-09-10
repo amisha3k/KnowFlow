@@ -25,6 +25,84 @@ Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project desig
 
 ---
 
+## Dependencies
+
+- streamlit
+- faiss-cpu
+- langchain
+- langchain_community
+- fpdf
+- pypdf
+- sentence-transformers
+- fastapi
+- pydantic
+- uvicorn
+
+---
+
+Step 2: Install Dependencies
+
+Install all required packages in one command:
+
+pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn
+
+
+Note: This installs everything needed for both backend and frontend.
+
+Running the Project
+Backend (FastAPI)
+
+Open a terminal in the Medical_bot folder.
+
+Run:
+
+uvicorn backend.main:app --host 0.0.0.0 --port 8000
+
+
+Backend will be available at: http://localhost:8000
+
+Frontend (Streamlit)
+
+Open another terminal in the Medical_bot/frontend folder.
+
+Run:
+
+streamlit run app.py --server.address=0.0.0.0 --server.port=8501
+
+
+Frontend will be available at: http://localhost:8501
+
+Optional: Run with Docker
+
+If you want to use Docker, follow these steps:
+
+Make sure Docker and Docker Compose are installed.
+
+Build and run containers:
+
+docker-compose up --build
+
+
+Backend: http://localhost:8000
+
+Frontend: http://localhost:8501
+
+Project Structure
+Medical_bot/
+│
+├── backend/                 # FastAPI backend code
+│   ├── main.py
+│   └── ...
+│
+├── frontend/                # Streamlit frontend code
+│   ├── app.py
+│   └── ...
+│
+├── Dockerfile.backend       # Dockerfile for backend (optional)
+├── Dockerfile.frontend      # Dockerfile for frontend (optional)
+├── docker-compose.yml       # Docker compose file (optional)
+└── README.md                # This file
+
 
 
 
