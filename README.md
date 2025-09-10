@@ -25,6 +25,15 @@ Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project desig
 
 ---
 
+## Usage
+
+- **Open the Streamlit app in your browser: http://localhost:8501
+- **Upload PDFs or documents to the app.
+- **Enter medical queries in the chat interface.
+- **The AI agent will retrieve relevant information and provide responses.
+
+---
+
 ## Installation
 
 > Make sure you have Python 3.10+ installed.
@@ -34,3 +43,29 @@ Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project desig
 ```bash
 git clone https://github.com/your-username/medical_bot.git
 cd medical_bot
+```
+2. Upgrade pip:
+```bash
+pip install --upgrade pip
+```
+3.Install Dependencies:
+```bash
+pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn
+```
+4.Running the Backend (FastAPI):
+```bash
+cd backend
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+5.Running the Frontend (Streamlit):
+```bash
+cd frontend
+streamlit run main.py
+```
+6.Using Docker (Optional):
+```bash
+docker build -t medical_bot:latest .
+docker run -p 8501:8501 -p 8000:8000 medical_bot:latest
+```
+
+
