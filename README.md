@@ -25,6 +25,26 @@ Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project desig
 
 ---
 
+## Usage Flow Diagram
+
++----------------+          +----------------+          +----------------+
+|   User Query   |  ---->   |  Streamlit UI  |  ---->   |  Backend API   |
++----------------+          +----------------+          +----------------+
+        |                                                     |
+        |                                                     v
+        |                                             +----------------+
+        |                                             |  LangChain RAG |
+        |                                             +----------------+
+        |                                                     |
+        |                                                     v
+        |                                           +----------------+
+        |                                           | FAISS Vector DB|
+        |                                           +----------------+
+        |                                                     |
+        |                                                     v
+        +------------------------------------------------> Response
+
+
 ## Installation
 
 > Make sure you have Python 3.10+ installed.
@@ -34,5 +54,6 @@ Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project desig
 ```bash
 git clone https://github.com/your-username/medical_bot.git
 cd medical_bot
+
 
 
