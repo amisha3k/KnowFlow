@@ -1,111 +1,123 @@
-# Medical Bot AI Agent (RAG-Based)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Bot README</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #eaeaea;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        a {
+            color: #2980b9;
+        }
+        ul {
+            margin-top: 0;
+        }
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Medical Bot</h1>
+    <p>A medical document AI assistant built with <strong>Streamlit</strong> (frontend) and <strong>FastAPI</strong> (backend). The app allows users to upload PDFs and ask medical questions. The AI retrieves relevant information and provides responses.</p>
 
-Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project designed to provide intelligent responses and assistance for medical-related queries. It integrates a Streamlit frontend with a FastAPI backend and leverages state-of-the-art AI libraries for embedding, retrieval, and document handling.
+    <hr>
 
----
+    <h2>Table of Contents</h2>
+    <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#running-the-application">Running the Application</a></li>
+        <li><a href="#usage">Usage</a></li>
+        <li><a href="#project-structure">Project Structure</a></li>
+        <li><a href="#notes">Notes</a></li>
+    </ul>
 
-## Features
+    <hr>
 
-- **RAG-Based AI**: Uses semantic search to retrieve relevant medical information from PDFs or documents.  
-- **Streamlit Frontend**: Interactive web interface for easy user interaction.  
-- **FastAPI Backend**: Serves API endpoints for AI inference and document handling.  
-- **Document Handling**: Supports PDF uploads and extraction using `fpdf` and `pypdf`.  
-- **Semantic Search**: Powered by `faiss-cpu` and `sentence-transformers` for fast and accurate retrieval.  
-- **LangChain Integration**: Manages conversational memory, prompts, and retrieval logic.  
+    <h2 id="installation">Installation</h2>
 
----
+    <h3>Option 1: Using Python</h3>
+    <p>Upgrade pip:</p>
+    <pre><code>pip install --upgrade pip</code></pre>
 
-## Tech Stack
+    <p>Install all dependencies:</p>
+    <pre><code>pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn</code></pre>
 
-- **Frontend**: Streamlit  
-- **Backend**: FastAPI, Uvicorn  
-- **RAG & NLP**: LangChain, LangChain Community, FAISS, Sentence Transformers  
-- **Document Processing**: PyPDF, FPDF  
-- **Data Validation**: Pydantic  
+    <h3>Option 2: Using Docker</h3>
+    <p>Ensure Docker and Docker Compose are installed.</p>
+    <p>Build and run the containers:</p>
+    <pre><code>docker-compose up --build</code></pre>
 
----
+    <hr>
 
-## Dependencies
+    <h2 id="running-the-application">Running the Application</h2>
 
-- streamlit
-- faiss-cpu
-- langchain
-- langchain_community
-- fpdf
-- pypdf
-- sentence-transformers
-- fastapi
-- pydantic
-- uvicorn
+    <h3>Streamlit Frontend</h3>
+    <pre><code>streamlit run frontend/main.py</code></pre>
 
----
+    <h3>FastAPI Backend</h3>
+    <pre><code>uvicorn backend.main:app --host 0.0.0.0 --port 8000</code></pre>
 
-Step 2: Install Dependencies
+    <hr>
 
-Install all required packages in one command:
+    <h2 id="usage">Usage</h2>
+    <ul>
+        <li>Open the Streamlit app in your browser: <a href="http://localhost:8501">http://localhost:8501</a></li>
+        <li>Upload PDFs or documents to the app.</li>
+        <li>Enter medical queries in the chat interface.</li>
+        <li>The AI agent will retrieve relevant information and provide responses.</li>
+    </ul>
 
-pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn
+    <hr>
 
-
-Note: This installs everything needed for both backend and frontend.
-
-Running the Project
-Backend (FastAPI)
-
-Open a terminal in the Medical_bot folder.
-
-Run:
-
-uvicorn backend.main:app --host 0.0.0.0 --port 8000
-
-
-Backend will be available at: http://localhost:8000
-
-Frontend (Streamlit)
-
-Open another terminal in the Medical_bot/frontend folder.
-
-Run:
-
-streamlit run app.py --server.address=0.0.0.0 --server.port=8501
-
-
-Frontend will be available at: http://localhost:8501
-
-Optional: Run with Docker
-
-If you want to use Docker, follow these steps:
-
-Make sure Docker and Docker Compose are installed.
-
-Build and run containers:
-
-docker-compose up --build
-
-
-Backend: http://localhost:8000
-
-Frontend: http://localhost:8501
-
-Project Structure
-Medical_bot/
+    <h2 id="project-structure">Project Structure</h2>
+    <pre><code>medical_bot/
 │
-├── backend/                 # FastAPI backend code
+├── backend/
 │   ├── main.py
 │   └── ...
 │
-├── frontend/                # Streamlit frontend code
-│   ├── app.py
+├── frontend/
+│   ├── main.py
 │   └── ...
 │
-├── Dockerfile.backend       # Dockerfile for backend (optional)
-├── Dockerfile.frontend      # Dockerfile for frontend (optional)
-├── docker-compose.yml       # Docker compose file (optional)
-└── README.md                # This file
+├── data/
+│   └── documents/
+│
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── README.html</code></pre>
 
+    <hr>
 
+    <h2 id="notes">Notes</h2>
+    <ul>
+        <li>Ensure all dependencies are installed before running the application.</li>
+        <li>For Docker, make sure the ports 8501 (Streamlit) and 8000 (FastAPI) are available.</li>
+        <li>The project is designed for educational and prototype purposes. For production, secure API keys and handle data carefully.</li>
+    </ul>
 
-
-
+</body>
+</html>
 
 
