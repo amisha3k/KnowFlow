@@ -10,6 +10,7 @@ app=FastAPI()
 #/upload_docs/ → FAISS → /chat/ → model → answer
 HF_RAG_TOKEN = os.getenv("HF_RAG_TOKEN") 
 EURI_API_KEY = os.getenv("EURI_API_KEY")
+
 if not EURI_API_KEY:
     raise ValueError("EURI_API_KEY is missing! Set it in your environment.")
 chat_model=get_chat_model(EURI_API_KEY)

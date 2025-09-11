@@ -2,11 +2,11 @@ import time
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-os.environ["STREAMLIT_CONFIG_DIR"] = "/tmp/.streamlit"
+os.environ["STREAMLIT_CONFIG_DIR"] = "/app/.streamlit"
 # Disable usage stats
 os.environ["STREAMLIT_BROWSER_GATHERUSAGESTATS"] = "false"
-# Tell Streamlit to use a writable directory
-os.environ["STREAMLIT_CONFIG_DIR"] = "/tmp/.streamlit"
+# # Tell Streamlit to use a writable directory
+# os.environ["STREAMLIT_CONFIG_DIR"] = "/tmp/.streamlit"
 # Make sure the directory exists
 os.makedirs(os.environ["STREAMLIT_CONFIG_DIR"], exist_ok=True)
 
