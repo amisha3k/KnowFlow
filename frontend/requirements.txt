@@ -4,4 +4,8 @@ langchain
 langchain_community
 fpdf 
 pypdf
-sentence-transformersc
+sentence-transformers
+fastapi
+pydantic
+uvicorn
+euriai

@@ -3,12 +3,17 @@ from pydantic import BaseModel
 from app.vectorstore_utils import create_faiss_index, retrieve_relevent_docs
 from app.chat_utils import get_chat_model,ask_chat_model
 from app.config import EURI_API_KEY
+import os
 
 app=FastAPI()
 
 #/upload_docs/ → FAISS → /chat/ → model → answer
-
+HF_RAG_TOKEN = os.getenv("HF_RAG_TOKEN") 
+EURI_API_KEY = os.getenv("EURI_API_KEY")
+if not EURI_API_KEY:
+    raise ValueError("EURI_API_KEY is missing! Set it in your environment.")
 chat_model=get_chat_model(EURI_API_KEY)
+
 vectorstore=None
 
 class Query(BaseModel):
@@ -16,6 +21,7 @@ class Query(BaseModel):
 
 @app.post("/upload_docs/")
 async def upload_docs(chunks : list[str]):
+    global vectorstore
     vectorstore=create_faiss_index(chunks)
     return { "status": "Document processed successfully"}    
 

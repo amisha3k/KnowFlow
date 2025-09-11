@@ -1,4 +1,16 @@
 import time
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+os.environ["STREAMLIT_CONFIG_DIR"] = "/tmp/.streamlit"
+# Disable usage stats
+os.environ["STREAMLIT_BROWSER_GATHERUSAGESTATS"] = "false"
+# Tell Streamlit to use a writable directory
+os.environ["STREAMLIT_CONFIG_DIR"] = "/tmp/.streamlit"
+# Make sure the directory exists
+os.makedirs(os.environ["STREAMLIT_CONFIG_DIR"], exist_ok=True)
+
+
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.memory import ConversationBufferMemory  # or ConversationBufferWindowMemory
@@ -21,100 +33,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# st.markdown(
-#     """
-#     <style>
-#         /* Whole App Background */
-#         .stApp {
-#             background-color: #000000 !important;
-#             color: #ffffff !important;
-#         }
-        
-#         header[data-testid="stHeader"] {
-#             background-color: #000000 !important;
-#             color: #ffffff !important;
-#         }
-
-#         header[data-testid="stHeader"] .stAppHeader {
-#             background-color: #000000 !important;
-#             color: #ffffff !important;
-#         }
-        
-
-#         /* Sidebar background */
-#         section[data-testid="stSidebar"] {
-#             background-color: #000000 !important;
-#             color: #ffffff !important;
-#         }
-
-#         /* Headings - simple white, no glow */
-#         h1, h2, h3 {
-#             font-weight: bold;
-#             color: #ffffff !important;
-#             text-shadow: none !important;
-#         }
-
-#         /* Sidebar text */
-#         section[data-testid="stSidebar"] h1,
-#         section[data-testid="stSidebar"] h2,
-#         section[data-testid="stSidebar"] h3,
-#         section[data-testid="stSidebar"] p {
-#             color: #ffffff !important;
-#             font-weight: normal !important;
-#             text-shadow: none !important;
-#         }
-
-#         /* File uploader box */
-#         [data-testid="stFileUploader"] {
-#             background-color: #111111;
-#             border: 0.5px dashed #ffffff;
-#             border-radius: 5px;
-#             padding: 1rem;
-#             color: #ffffff;
-#         }
-
-#         /* Buttons - simple black & white */
-#         .stButton>button {
-#             background-color: #ffffff;
-#             color: #000000;
-#             font-weight: bold;
-#             border-radius: 5px;
-#         }
-
-#         .stButton>button:hover {
-#             background-color: #cccccc;
-#             color: #000000;
-#         }
-
-#         /* Alerts - plain white text */
-#         .stAlert {
-#             font-weight: normal;
-#             color: #ffffff !important;
-#             text-shadow: none !important;
-#         }
-
-#         /* Chat input box styling */
-#         div[data-testid="stChatInput"] {
-#             background-color: #ffffff !important;
-#             border: 1px solid #ffffff !important;
-#             border-radius: 2px !important;
-#             padding: 2px !important;
-#             color: #000000 !important;
-#         }
-
-#         /* Placeholder text inside input */
-#         div[data-testid="stChatInput"] input {
-#             color: #000000 !important;
-#         }
-
-#         /* Send button */
-#         div[data-testid="stChatInput"] button {
-#             color: #000000 !important;
-#         }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 st.markdown(
     """
     <style>
@@ -211,9 +129,8 @@ st.markdown(
 
 
 
-# ------------------------
 # Session State Initialization
-# ------------------------
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -228,13 +145,11 @@ if "memory" not in st.session_state:
         memory_key="chat_history",
         return_messages=True
     )
-    # 🔄 Swap with ConversationBufferWindowMemory(k=5, return_messages=True)
-    # if you want it to only remember the last 5 exchanges
+    # Swap with ConversationBufferWindowMemory(k=5, return_messages=True)
+    # if i want it to only remember the last 5 exchanges
 
-
-# ------------------------
 # Sidebar: Document Upload
-# ------------------------
+
 with st.sidebar:
     st.markdown("###  **Document Upload**")
     st.markdown("Upload your documents to start chatting")
@@ -271,9 +186,7 @@ with st.sidebar:
                 st.balloons()
 
 
-# ------------------------
 # Main Chat Interface
-# ------------------------
 st.markdown("### 💬 **Chat with your documents**")
 
 # Display past messages
@@ -300,9 +213,8 @@ if prompt:
         st.markdown(prompt)
         st.caption(timestamp)
 
-    # ------------------------
+ 
     # Generate Assistant Response with Memory
-    # ------------------------
     if st.session_state.vectorstore and st.session_state.chat_model:
         with st.chat_message("assistant"):
             with st.spinner("🔍 Searching your documents..."):
@@ -311,7 +223,7 @@ if prompt:
                 )
                 context = "\n\n".join([doc.page_content for doc in relevant_docs])
 
-                # ✅ Retrieve chat history from memory
+                # Retrieve chat history from memory
                 history_text = st.session_state.memory.load_memory_variables({})["chat_history"]
 
                 # System prompt with history + context
