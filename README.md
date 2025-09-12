@@ -27,10 +27,10 @@ Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project desig
 
 ## Usage
 
-- **Open the Streamlit app in your browser: http://localhost:8501
-- **Upload PDFs or documents to the app.
-- **Enter medical queries in the chat interface.
-- **The AI agent will retrieve relevant information and provide responses.
+- Open the Streamlit app in your browser: http://localhost:8501
+- Upload PDFs or documents to the app.
+- Enter medical queries in the chat interface.
+- The AI agent will retrieve relevant information and provide responses.
 
 ---
 
