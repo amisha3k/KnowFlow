@@ -16,7 +16,8 @@ COPY frontend/ /app/frontend
 COPY app/ /app/app
 
 # Make writable directory for Streamlit
-RUN mkdir -p /app/.streamlit
+RUN mkdir -p /app/.streamlit && chmod -R 777 /app/.streamlit
+
 
 # Set environment variables
 ENV STREAMLIT_CONFIG_DIR=/app/.streamlit

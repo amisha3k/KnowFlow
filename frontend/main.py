@@ -3,11 +3,7 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ["STREAMLIT_CONFIG_DIR"] = "/app/.streamlit"
-# Disable usage stats
 os.environ["STREAMLIT_BROWSER_GATHERUSAGESTATS"] = "false"
-# # Tell Streamlit to use a writable directory
-# os.environ["STREAMLIT_CONFIG_DIR"] = "/tmp/.streamlit"
-# Make sure the directory exists
 os.makedirs(os.environ["STREAMLIT_CONFIG_DIR"], exist_ok=True)
 
 
@@ -23,9 +19,7 @@ from app.chat_utils import get_chat_model, ask_chat_model
 from app.config import EURI_API_KEY
 
 
-# ------------------------
 # Page setup
-# ------------------------
 st.set_page_config(
     page_title=" - Document Assistant",
     page_icon="🩺",
@@ -186,7 +180,7 @@ with st.sidebar:
                 st.balloons()
 
 
-# Main Chat Interface
+# Main Chat Interface yeyeee
 st.markdown("### 💬 **Chat with your documents**")
 
 # Display past messages

@@ -8,7 +8,7 @@ import os
 app=FastAPI()
 
 #/upload_docs/ → FAISS → /chat/ → model → answer
-HF_RAG_TOKEN = os.getenv("HF_RAG_TOKEN") 
+# HF_RAG_TOKEN = os.getenv("HF_RAG_TOKEN") 
 EURI_API_KEY = os.getenv("EURI_API_KEY")
 
 if not EURI_API_KEY:
