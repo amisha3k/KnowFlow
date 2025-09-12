@@ -50,7 +50,7 @@ pip install --upgrade pip
 ```
 3. Install Dependencies:
 ```bash
-pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn
+pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn euriapi
 ```
 4. Running the Backend (FastAPI):
 ```bash
