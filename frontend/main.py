@@ -342,6 +342,17 @@ st.set_page_config(
 # -------------------------
 # Dark Theme CSS
 # -------------------------
+# st.markdown("""
+# <style>
+# .stApp { background-color: #2c2c2c !important; color: #d3d3d3 !important; }
+# header[data-testid="stHeader"] { background-color: #2c2c2c !important; color: #d3d3d3 !important; }
+# section[data-testid="stSidebar"] { background-color: #3a3a3a !important; color: #d3d3d3 !important; }
+# h1,h2,h3 { color: #f0f0f0 !important; font-weight:bold; }
+# .stButton>button { background-color: #d3d3d3; color: #2c2c2c; font-weight:bold; border-radius:5px;}
+# .stButton>button:hover { background-color: #b0b0b0; color:#2c2c2c; }
+# [data-testid="stFileUploader"] { background-color: #444444; border:0.5px dashed #d3d3d3; border-radius:5px; padding:1rem; color:#d3d3d3;}
+# </style>
+# """, unsafe_allow_html=True)
 st.markdown("""
 <style>
 .stApp { background-color: #2c2c2c !important; color: #d3d3d3 !important; }
@@ -351,8 +362,21 @@ h1,h2,h3 { color: #f0f0f0 !important; font-weight:bold; }
 .stButton>button { background-color: #d3d3d3; color: #2c2c2c; font-weight:bold; border-radius:5px;}
 .stButton>button:hover { background-color: #b0b0b0; color:#2c2c2c; }
 [data-testid="stFileUploader"] { background-color: #444444; border:0.5px dashed #d3d3d3; border-radius:5px; padding:1rem; color:#d3d3d3;}
+
+/* Chat messages text color */
+.stChatMessage div[data-testid="stMarkdownContainer"] p {
+    color: #ffffff !important;
+}
+
+/* Optional: assistant message background */
+.stChatMessage[data-testid="stMessage"]:nth-child(2) div[data-testid="stMarkdownContainer"] {
+    background-color: #444444 !important;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
 </style>
 """, unsafe_allow_html=True)
+
 
 # -------------------------
 # Session State Initialization
@@ -394,10 +418,13 @@ with st.sidebar:
                 for text in all_texts:
                     chunks.extend(text_splitter.split_text(text))
 
+                st.write("Step 2: Chunks created", len(chunks)) 
+
                 # Create Vectorstore
                 try:
                     vectorstore = create_faiss_index(chunks)
                     st.session_state.vectorstore = vectorstore
+                    st.write("Step 3: Vectorstore created", st.session_state.vectorstore is not None)
                 except Exception as e:
                     st.error(f"error creating vectorstor : {e}")
 
@@ -405,6 +432,7 @@ with st.sidebar:
                 # Load Chat Model
                 chat_model = get_chat_model(EURI_API_KEY)
                 st.session_state.chat_model = chat_model
+                st.write("Step 4: Chat model loaded", st.session_state.chat_model is not None)
 
                 st.success("Documents processed successfully!")
                 st.balloons()
