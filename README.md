@@ -1,6 +1,6 @@
-# Medical Bot AI Agent (RAG-Based)
+# KnowFlow(Knowledge - Flow) AI Agent (RAG-Based)
 
-Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project designed to provide intelligent responses and assistance for medical-related queries. It integrates a Streamlit frontend with a FastAPI backend and leverages state-of-the-art AI libraries for embedding, retrieval, and document handling.
+KnowFlow is a **Retrieval-Augmented Generation (RAG)** project designed to provide intelligent responses and assistance for any document realed queries. It integrates a Streamlit frontend with a FastAPI backend and leverages state-of-the-art AI libraries for embedding, retrieval, and document handling.
 
 ---
 
@@ -11,7 +11,8 @@ Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project desig
 - **FastAPI Backend**: Serves API endpoints for AI inference and document handling.  
 - **Document Handling**: Supports PDF uploads and extraction using `fpdf` and `pypdf`.  
 - **Semantic Search**: Powered by `faiss-cpu` and `sentence-transformers` for fast and accurate retrieval.  
-- **LangChain Integration**: Manages conversational memory, prompts, and retrieval logic.  
+- **LangChain Integration**: Manages conversational memory, prompts, and retrieval logic.
+- **HuggingFace**: Deployed in HuggingFace
 
 ---
 
@@ -27,10 +28,10 @@ Medical Bot AI Agent is a **Retrieval-Augmented Generation (RAG)** project desig
 
 ## Usage
 
-- **Open the Streamlit app in your browser: http://localhost:8501
-- **Upload PDFs or documents to the app.
-- **Enter medical queries in the chat interface.
-- **The AI agent will retrieve relevant information and provide responses.
+- Open the Streamlit app in your browser: http://localhost:8501
+- Upload PDFs or documents to the app.
+- Enter medical queries in the chat interface.
+- The AI agent will retrieve relevant information and provide responses.
 
 ---
 
@@ -50,7 +51,7 @@ pip install --upgrade pip
 ```
 3. Install Dependencies:
 ```bash
-pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn
+pip install streamlit faiss-cpu langchain langchain_community fpdf pypdf sentence-transformers fastapi pydantic uvicorn euriapi
 ```
 4. Running the Backend (FastAPI):
 ```bash
