@@ -7,7 +7,7 @@ COPY requirements.txt .
 RUN pip install --upgrade pip \
  && pip install --no-cache-dir -r requirements.txt
 
-#copy .env file into the container
+# Copy .env file into the container
 COPY .env .env
 
 # Copy project source code (backend, frontend, app)
@@ -15,16 +15,14 @@ COPY backend/ /app/backend
 COPY frontend/ /app/frontend
 COPY app/ /app/app
 
-# Make writable directory for Streamlit
-RUN mkdir -p /app/.streamlit && chmod -R 777 /app/.streamlit
-
-
-# Set environment variables
-ENV STREAMLIT_CONFIG_DIR=/app/.streamlit
+# Use /tmp for Streamlit config/cache/runtime (writable in Hugging Face)
+ENV STREAMLIT_RUNTIME_DIR=/tmp/.streamlit
+ENV STREAMLIT_CACHE_DIR=/tmp/.streamlit-cache
 ENV STREAMLIT_BROWSER_GATHERUSAGESTATS=false
 ENV PYTHONPATH=/app
+ENV HOME=/tmp
 
-# Expose backend + frontend ports
+# Expose ports
 EXPOSE 8000
 EXPOSE 7860
 

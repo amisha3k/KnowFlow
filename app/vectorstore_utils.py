@@ -1,7 +1,7 @@
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
-
-# # from langchain_huggingface import HuggingFaceEmbeddings
+from sentence_transformers import SentenceTransformer
+#from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 # from langchain.vectorstores import FAISS
 # from langchain.embeddings import HuggingFaceEmbeddings
 
@@ -14,7 +14,9 @@ from typing import List
 #This model will be used to convert each input string into a high-dimensional vector (embedding).
 #Embeds each text using the Hugging Face model,Stores the vectors in a FAISS index for fast similarity search.
 def create_faiss_index(texts: List[str]):
-    embeddings=HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2") 
+    model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2", device='cpu')
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2", model_kwargs={"device": "cpu"})
+    # embeddings=HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2") 
     return FAISS.from_texts(texts,embeddings) 
 
 

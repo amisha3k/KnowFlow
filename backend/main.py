@@ -23,9 +23,11 @@ class Query(BaseModel):
 @app.post("/upload_docs/")
 async def upload_docs(chunks : list[str]):
     global vectorstore
-    vectorstore=create_faiss_index(chunks)
-    return { "status": "Document processed successfully"}    
-
+    try:
+        vectorstore = create_faiss_index(chunks)
+        return { "status": "Document processed successfully"}    
+    except Exception as e:
+        return {"error": str(e)}
 @app.post("/chat")
 async def chat(query: Query):
     if not vectorstore:

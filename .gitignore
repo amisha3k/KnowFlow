@@ -7,3 +7,6 @@ __pycache__/
 *.log
 .DS_Store
 .env
+# Python virtual environments
+knowflow_env/
+

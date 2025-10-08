@@ -2,6 +2,7 @@ streamlit
 faiss-cpu
 langchain
 langchain_community
+langchain-huggingface
 fpdf 
 pypdf
 sentence-transformers
